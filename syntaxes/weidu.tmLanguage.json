@@ -1,0 +1,110 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "weidu",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#storage"
+		},
+		{
+			"include": "#entities"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.weidu",
+					"match": "\\b(ACTION_IF|ACTION_FOR_EACH|ACTION_DEFINE_ASSOCIATIVE_ARRAY|ACTION_MATCH|ACTION_PHP_EACH|ACTION_TRY|AS|IN|BEGIN|BUT_ONLY|END|ELSE|FOR|IF|PATCH_IF|THEN|UNLESS|WITH|DEFAULT|PHP_EACH)\\b"
+				},
+				{
+					"name": "invalid.weidu",
+					"match": "\\b(FAIL)\\b"
+				}
+			]
+		},
+		"storage": {
+			"patterns": [
+				{
+					"name": "storage.modifier.weidu",
+					"match": "\\b(INT_VAR|STR_VAR)\\b"
+				},
+				{
+					"name": "variable.other.less.weidu",
+					"match": "@\\d+"
+				}
+			]
+		},
+		"entities": {
+			"patterns": [
+				{
+					"name": "entity.name.class.weidu",
+					"match": "\\b(ALLOW_MISSING|AUTHOR|AUTO_TRA|APPEND|BACKUP|COPY|COPY_EXISTING|COPY_EXISTING_REGEXP|EXTEND_BOTTOM|EXTEND_TOP|LANGUAGE|LPF|REPLACE|SAY)\\b"
+				},
+				{
+					"name": "entity.other.attribute-name.weidu",
+					"match": "%.*%"
+				},
+				{
+					"name": "meta.selector.weidu",
+					"match": "\\b(opcode|match_opcode|target|timing|parameter1|parameter2|resist_dispel|resource)(\\b|=)"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"match": "\\b(0x(\\d|[a-f]|[A-F])+|\\d+)\\b",
+					"name": "constant.numeric.weidu"
+				},
+				{
+					"match": "\\b(GLOB)\\b",
+					"name": "constant.language.weidu"
+				},
+				{
+					"name": "constant.regexp.weidu",
+					"match": "\\b(AND|OR|&|BOR)\\b"
+				}
+			]
+		},
+		"comments":{
+			"patterns": [
+				{
+					"name": "comment.block.weidu",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"scope": "punctuation.definition.comment.weidu",
+					"contentName":"comment.block"
+				},
+				{ 
+					"match": "//.*$", 
+					"name": "comment.line.weidu",
+					"scope": "punctuation.definition.comment.weidu"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.weidu",
+			"begin": "~",
+			"end": "~",
+			"patterns": [
+				{
+					"name": "constant.character.escape.weidu",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.weidu"
+}

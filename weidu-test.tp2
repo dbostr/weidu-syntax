@@ -1,0 +1,47 @@
+// meta.selector
+// variable.other.less -> @
+@target
+@123
+
+COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
+  READ_SHORT 0x1c spell_type
+  PATCH_IF spell_type = 1 BEGIN
+    READ_BYTE 0x25 spell_school
+    PATCH_IF spell_school = 2 OR     //    conjuration
+            spell_school = 1 OR     //    abjuration
+            spell_school = 6 OR     //    invocation
+            spell_school = 7 OR     //    necromancy
+            spell_school = 8 OR     //    alteration
+            spell_school = 9 BEGIN    //    wild
+      READ_BYTE 0x20 bard_excludes
+      WRITE_BYTE 0x20 (%bard_excludes% BOR ~0b10000000~)  // unusable by skalds
+    END
+  END
+BUT_ONLY
+COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+  READ_LONG 0x18 flags
+  PATCH_IF ((flags & BIT6) = 1) BEGIN
+     LPF ~ADD_ITEM_EQEFFECT~ INT_VAR opcode = 319 target = 1 timing = 2 parameter1 = IDS_OF_SYMBOL (~Kit~ ~KITINTERNALNAME~) parameter2 = 9 special = RESOLVE_STR_REF (@STRING RELATED TO KIT NAME) END                                   
+  END
+  BUT_ONLY
+  COPY_EXISTING ~spwi112.spl~ ~override~
+  LPF ADD_SPELL_EFFECT INT_VAR opcode = 177 parameter1 = %channeler_code% STR_VAR resource = ~D5_MDMG~ END
+// Add effect to creature file; Add minimum damage (opcode 250) to minsc
+COPY_EXISTING ~minsc6.cre~ ~override~
+   LPF ADD_CRE_EFFECT INT_VAR opcode=250 target=1 timing=9 parameter1=20 resist_dispel=0 END
+BUT_ONLY
+COPY_EXISTING ~splprot.2da~ ~override~
+   COUNT_2DA_COLS cols // amount of columns
+   READ_2DA_ENTRIES_NOW rows cols // read all file into memory  
+   FOR (row = 1; row < rows; ++row) BEGIN // iterate over rows
+      READ_2DA_ENTRY_FORMER rows row 0 ~stat~ // read column value
+      PATCH_IF ~%stat%~ STRING_EQUAL_CASE ~D5_INT_EQ~ BEGIN
+         SET int_eq_row = %row%
+      END
+   END
+BUT_ONLY
+
+COPY ~IntMod/files/d5LSprof.spl~ ~override~
+COPY ~IntMod/files/d5intspl.spl~ ~override~
+	// Map the dummy value of the spell to the correct row of the modified SPRPROT file
+  LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %int_eq_row% END

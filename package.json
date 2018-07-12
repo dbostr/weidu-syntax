@@ -1,0 +1,26 @@
+{
+    "name": "weidu",
+    "displayName": "WeiDU",
+    "description": "WeiDU syntax highlighting for Infinity Engine modding",
+    "version": "0.0.1",
+    "publisher": "dbostr",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "weidu",
+            "aliases": ["weidu", "WeiDU"],
+            "extensions": [".tp2",".d",".tra",".2da"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "weidu",
+            "scopeName": "source.weidu",
+            "path": "./syntaxes/weidu.tmLanguage.json"
+        }]
+    }
+}
