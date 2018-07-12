@@ -4,7 +4,7 @@ Syntax highlighting for WeiDU code (.tp2, .d, .2da, .tra) for Visual Studio Code
 
 ## Features
 
-\!\[Sample Dark\]\(./images/sample-highlighting-dark.png\)
+![Sample Dark](./images/sample-highlighting-dark.png)
 
 ## Requirements
 
@@ -26,8 +26,8 @@ None for now.
 ## Known Issues
 
 - There are WeiDU functions not highlighted
-- TODO: Determine which functions should be highlighted and not
 - Highlighting has been selected more based on colors from Dark+ than for proper syntax type, i.e. translation @2 is set to variable.other.less, %variable% is set to entity.other.attribute-name
+- TODO: Determine which functions should be highlighted and not
 
 ## Release Notes
 
