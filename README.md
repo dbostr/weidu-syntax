@@ -4,16 +4,24 @@ Syntax highlighting for WeiDU code (.tp2, .d, .2da, .tra) for Visual Studio Code
 
 ## Features
 
-\!\[Sample Dark\]\(images/sample-highlighting-dark.png\)
-
+\!\[Sample Dark\]\(./images/sample-highlighting-dark.png\)
 
 ## Requirements
 
--
+VS Code
+
+## Installation
+
+Clone to .vscode/extensions folder (default location for Windows is %userprofile%/.vscode/extensions).
+- Folder may need to be named 'weidu'.
+- Requires restart of VS Code.
+- Changes to settings locally require Ctrl-Shift-P >Reload Window.
+
+TODO: Make available from VS Code extensions.
 
 ## Extension Settings
 
--
+None for now.
 
 ## Known Issues
 
