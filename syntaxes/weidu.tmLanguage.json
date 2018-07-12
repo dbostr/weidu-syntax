@@ -58,7 +58,7 @@
 				},
 				{
 					"name": "meta.selector.weidu",
-					"match": "\\b(opcode|match_opcode|target|timing|parameter1|parameter2|resist_dispel|resource)(\\b|=)"
+					"match": "\\b(opcode|match_opcode|target|timing|parameter1|parameter2|special|resist_dispel|resource)(\\b|=)"
 				}
 			]
 		},
