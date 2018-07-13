@@ -29,6 +29,9 @@ END
 // variable.other.less -> @
 @target
 @123
+#234234
+(AT "test")
+( AT "mest" )
 
 COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
   READ_SHORT 0x1c spell_type

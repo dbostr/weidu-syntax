@@ -46,7 +46,7 @@
 				},
 				{
 					"name": "variable.other.less.weidu",
-					"match": "@\\d+"
+					"match": "((@|#)\\d+|\\(\\s*AT \\\"\\w+\\\"\\s*\\))"
 				},
 				{
 					"name": "entity.other.attribute-name.weidu",
