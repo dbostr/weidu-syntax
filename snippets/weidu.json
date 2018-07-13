@@ -1,0 +1,31 @@
+{
+	"TP2 Description": {
+		"prefix": "tp2 description",
+		"body": [
+			"/***************************************",
+			" *",
+			" *\tMod name: ${ModName}",
+			" *\tDate:     ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+			" *",
+			" *",
+			" **************************************/",
+			"",
+			"AUTHOR\t~${Author}~",
+			"VERSION\t~${Version}~",
+			"",
+			"BACKUP\t~${TM_DIRECTORY/.*\\([^\\]+)/$1/}/backup~",
+			"$0"
+		],
+		"description": "Top TP2 mod description"
+	},
+	"PATCH_IF": {
+		"prefix": "PATCH_IF",
+		"body": [
+			"PATCH_IF ${1:Condition} BEGIN",
+			"\t${2:Body}",
+			"END",
+			"$0"
+		],
+		"description": "PATCH_IF snippet"
+	}
+}

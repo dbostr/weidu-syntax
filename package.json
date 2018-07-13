@@ -21,6 +21,12 @@
             "language": "weidu",
             "scopeName": "source.weidu",
             "path": "./syntaxes/weidu.tmLanguage.json"
-        }]
+        }],
+        "snippets": [
+            {
+                "language": "weidu",
+                "path": "./snippets/weidu.json"
+            }
+        ]
     }
 }

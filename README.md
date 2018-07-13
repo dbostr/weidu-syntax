@@ -4,7 +4,13 @@ Syntax highlighting for WeiDU code (.tp2, .d, .2da, .tra) for Visual Studio Code
 
 ## Features
 
+### Highlighting
+
 ![Sample Dark](./images/sample-highlighting-dark.png)
+
+### Smart brackets
+- ~~
+- /* */
 
 ## Requirements
 
