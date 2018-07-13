@@ -9,10 +9,10 @@
 			"include": "#comments"
 		},
 		{
-			"include": "#strings"
+			"include": "#constants"
 		},
 		{
-			"include": "#constants"
+			"include": "#strings"
 		},
 		{
 			"include": "#storage"
@@ -29,6 +29,10 @@
 					"match": "\\b(ACTION_IF|ACTION_FOR_EACH|ACTION_DEFINE_ASSOCIATIVE_ARRAY|ACTION_MATCH|ACTION_PHP_EACH|ACTION_TRY|AS|IN|BEGIN|BUT_ONLY|END|ELSE|FOR|IF|PATCH_IF|THEN|UNLESS|WITH|DEFAULT|PHP_EACH)\\b"
 				},
 				{
+					"name": "keyword.other.weidu",
+					"match": "\\b(_INVALID_)\\b"
+				},
+				{
 					"name": "invalid.weidu",
 					"match": "\\b(FAIL)\\b"
 				}
@@ -38,11 +42,15 @@
 			"patterns": [
 				{
 					"name": "storage.modifier.weidu",
-					"match": "\\b(INT_VAR|STR_VAR)\\b"
+					"match": "\\b(INT_VAR|STR_VAR|RET)\\b"
 				},
 				{
 					"name": "variable.other.less.weidu",
 					"match": "@\\d+"
+				},
+				{
+					"name": "entity.other.attribute-name.weidu",
+					"match": "%\\w+%"
 				}
 			]
 		},
@@ -53,16 +61,16 @@
 					"match": "\\b(ALLOW_MISSING|AUTHOR|AUTO_TRA|APPEND|BACKUP|COPY|COPY_EXISTING|COPY_EXISTING_REGEXP|EXTEND_BOTTOM|EXTEND_TOP|LANGUAGE|LPF|REPLACE|SAY|VERSION)\\b"
 				},
 				{
-					"name": "entity.other.attribute-name.weidu",
-					"match": "%.*%"
+					"name": "entity.name.type.weidu",
+					"match": "\\b(DEFINE_ACTION_FUNCTION|DEFINE_PATCH_FUNCTION|LAUNCH_ACTION_FUNCTION|LAUNCH_PATCH_FUNCTION)\\b"
+				},
+				{
+					"name": "support.function.weidu",
+					"match": "\\b(READ_SHORT|READ_LONG|WRITE_SHORT|WRITE_LONG|PRINT|PATCH_PRINT|SPRINT|GET_OFFSET_ARRAY|GET_OFFSET_ARRAY2|READ_2DA_ENTRY_FORMER|COUNT_2DA_COLS|READ_2DA_ENTRY_FORMER|STRING_EQUAL_CASE|SET|ADD_SPELL_EFFECT|ADD_CRE_EFFECT|READ_2DA_ENTRIES_NOW|ALTER_EFFECT|IDS_OF_SYMBOL|RESOLVE_STR_REF|READ_BYTE|WRITE_BYTE)\\b"
 				},
 				{
 					"name": "meta.selector.weidu",
 					"match": "\\b(opcode|match_opcode|target|timing|parameter1|parameter2|special|resist_dispel|resource)(\\b|=)"
-				},
-				{
-					"name": "support.function.weidu",
-					"match": "\\b(READ_SHORT|READ_LONG|WRITE_SHORT|WRITE_LONG|PRINT|PATCH_PRINT|GET_OFFSET_ARRAY|GET_OFFSET_ARRAY2|READ_2DA_ENTRY_FORMER|COUNT_2DA_COLS|READ_2DA_ENTRY_FORMER|STRING_EQUAL_CASE|SET|ADD_SPELL_EFFECT|ADD_CRE_EFFECT|READ_2DA_ENTRIES_NOW|ALTER_EFFECT|IDS_OF_SYMBOL|RESOLVE_STR_REF|READ_BYTE|WRITE_BYTE)\\b"
 				}
 			]
 		},
@@ -73,7 +81,7 @@
 					"name": "constant.numeric.weidu"
 				},
 				{
-					"match": "\\b(GLOB|BIT6|ITM_V10_HEAD_EFFECTS)\\b",
+					"match": "\\b(GLOB|BIT6|ITM_V10_HEAD_EFFECTS|~override~)\\b",
 					"name": "constant.language.weidu"
 				},
 				{
@@ -99,13 +107,45 @@
 			]
 		},
 		"strings": {
-			"name": "string.quoted.double.weidu",
-			"begin": "~",
-			"end": "~",
 			"patterns": [
 				{
-					"name": "constant.character.escape.weidu",
-					"match": "\\\\."
+					"name": "string.quoted.single.weidu",
+					"begin": "~",
+					"end": "~",
+					"patterns": [
+						{
+							"name": "constant.character.escape.weidu",
+							"match": "\\\\."
+						},
+						{
+							"name": "constant.regexp.weidu",
+							"match": "\\b(override)\\b"
+						},
+						{
+							"name": "entity.other.attribute-name",
+							"match": "%\\w+%"
+						}
+					]
+				},
+				{
+					"name": "string.quoted.double.weidu",
+					"begin": "\"",
+					"end": "\"",
+						"patterns": [
+							{
+								"name": "constant.character.escape.weidu",
+								"match": "\\\\."
+							},
+							{
+								"name": "constant.regexp.weidu",
+								"match": "\\b(override)\\b"
+							},
+							{
+								"name": "entity.other.attribute-name",
+								"match": "%\\w+%"
+							}
+						]
+
 				}
 			]
 		}

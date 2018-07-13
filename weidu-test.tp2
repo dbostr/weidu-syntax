@@ -1,3 +1,30 @@
+/***************************************
+ *
+ *	Mod name: ModName
+ *	Date:     2018-07-12
+ *
+ *
+ **************************************/
+
+AUTHOR	~Author~
+VERSION	~Version~
+
+BACKUP	~${TM_DIRECTORY/.*\([^\]+)//}/backup~
+
+
+
+PATCH_IF spell_school = 1 BEGIN
+  READ_BYTE 0x20 bard_excludes
+END
+PATCH_IF test BEGIN
+  hello
+  PATCH_IF more BEGIN
+    less
+  END
+  
+END
+
+
 // meta.selector
 // variable.other.less -> @
 @target
@@ -18,6 +45,8 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.spl$~ ~override~
     END
   END
 BUT_ONLY
+
+SAY @12333
 COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
   READ_LONG 0x18 flags
   PATCH_IF ((flags & BIT6) = 1) BEGIN
@@ -45,3 +74,38 @@ COPY ~IntMod/files/d5LSprof.spl~ ~override~
 COPY ~IntMod/files/d5intspl.spl~ ~override~
 	// Map the dummy value of the spell to the correct row of the modified SPRPROT file
   LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = %int_eq_row% END
+
+
+COPY_EXISTING miscbc.itm override
+  GET_OFFSET_ARRAY ab_array 0x64 4 0x68 2 0 0 0x38
+  PHP_EACH ab_array AS int => ab_off BEGIN
+    GET_OFFSET_ARRAY2 fx_array ab_off ITM_V10_HEAD_EFFECTS
+    PHP_EACH fx_array AS int => fx_off BEGIN
+      READ_SHORT fx_off fx_type
+      PATCH_IF fx_type = 216 BEGIN
+        READ_LONG fx_off + 0x4 amount
+        PATCH_PRINT "I drain %amount% level(s)"
+      END
+    END
+  END
+BUT_ONLY
+
+
+DEFINE_PATCH_FUNCTION count_spells INT_VAR level = 1 STR_VAR type = "WI" RET num BEGIN
+    SET num = 0
+    PATCH_IF (~%SOURCE_EXT%~ STRING_EQUAL_CASE ~CRE~) THEN BEGIN
+        // do some magic here that actually counts the number of spells and sets
+        // the variable num to that number.
+    END
+END
+//After that you can LAUNCH it:
+
+COPY_EXISTING ~my.cre~ ~override~
+    // count number of level 1 wizard spells (default arguments of the function)
+    LAUNCH_PATCH_FUNCTION count_spells RET lvl1_wizard = num END
+    // and now the level 5 priest spells
+    SET level = 5
+    SPRINT type = "PR"
+    LAUNCH_PATCH_FUNCTION count_spells RET lvl5_priest = num END
+
+    PATCH_PRINT ~This CRE has %lvl1_wizard% level 1 wizard spells and %lvl5_priest% level 5 priest spells~
