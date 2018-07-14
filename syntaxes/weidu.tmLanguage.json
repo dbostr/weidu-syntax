@@ -26,7 +26,7 @@
 			"patterns": [
 				{
 					"name": "keyword.control.weidu",
-					"match": "\\b(ACTION_IF|ACTION_FOR_EACH|ACTION_DEFINE_ASSOCIATIVE_ARRAY|ACTION_MATCH|ACTION_PHP_EACH|ACTION_TRY|AS|IN|BEGIN|BUT_ONLY|END|ELSE|FOR|IF|PATCH_IF|THEN|UNLESS|WITH|DEFAULT|PHP_EACH)\\b"
+					"match": "\\b(ACTION_IF|ACTION_FOR_EACH|ACTION_DEFINE_ASSOCIATIVE_ARRAY|ACTION_MATCH|ACTION_PHP_EACH|ACTION_TRY|AS|IN|BEGIN|BUT_ONLY|BUT_ONLY_IF_IT_CHANGES|END|ELSE|FOR|IF|PATCH_IF|THEN|UNLESS|WITH|DEFAULT|PHP_EACH)\\b"
 				},
 				{
 					"name": "keyword.other.weidu",
@@ -81,7 +81,7 @@
 					"name": "constant.numeric.weidu"
 				},
 				{
-					"match": "\\b(GLOB|BIT6|ITM_V10_HEAD_EFFECTS|~override~)\\b",
+					"match": "\\b(GLOB|BIT6|ITM_V10_HEAD_EFFECTS|SOURCE_SIZE|~override~)\\b",
 					"name": "constant.language.weidu"
 				},
 				{
