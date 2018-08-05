@@ -14,7 +14,7 @@
         "languages": [{
             "id": "weidu",
             "aliases": ["weidu", "WeiDU"],
-            "extensions": [".tp2",".tpa",".d",".tra",".2da"],
+            "extensions": [".tp2",".tpa",".tph",".d",".tra",".2da"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{
